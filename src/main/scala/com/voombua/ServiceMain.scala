@@ -6,9 +6,9 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.Http.ServerBinding
 import akka.stream.ActorMaterializer
 import com.voombua.routes.UserRoutes
-import com.voombua.utils.{Config, MigrationConfig}
+import com.voombua.utils.{ Config, MigrationConfig }
 
-import scala.concurrent.{ExecutionContextExecutor, Future}
+import scala.concurrent.{ ExecutionContextExecutor, Future }
 
 object ServiceMain extends App with Config with MigrationConfig {
 
