@@ -37,5 +37,5 @@ object ServiceMain extends App with Config with MigrationConfig {
       //      System shutdown
       system.terminate()
   }
-}r
+}
 
