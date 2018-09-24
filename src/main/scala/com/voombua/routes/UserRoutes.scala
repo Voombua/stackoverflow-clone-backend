@@ -35,19 +35,17 @@ class UserRoutes extends JsonMapping {
     pathPrefix(service / version / "login") {
       post {
         pathEndOrSingleSlash {
-//          withRequestTimeout(5 minutes) {
-            entity(as[LoginRequestMessage]) { loginData ⇒
-              onComplete(UserCommands.loginByEmail(loginData)) {
-                case Success(user) ⇒ if (user) {
-                  complete(StatusCodes.OK)
-                } else {
-                  complete(StatusCodes.Forbidden)
-                }
-                case Failure(_) ⇒ complete(StatusCodes.NotFound)
+          entity(as[LoginRequestMessage]) { loginData ⇒
+            onComplete(UserCommands.loginByEmail(loginData)) {
+              case Success(user) ⇒ if (user) {
+                complete(StatusCodes.OK)
+              } else {
+                complete(StatusCodes.Forbidden)
               }
-
+              case Failure(_) ⇒ complete(StatusCodes.NotFound)
             }
-//          }
+
+          }
         }
       }
     }
