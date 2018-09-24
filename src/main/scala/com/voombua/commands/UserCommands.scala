@@ -3,7 +3,7 @@ package com.voombua.commands
 import com.voombua.messages.LoginRequestMessage
 import com.voombua.repos.UserDao
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.{ ExecutionContext, Future }
 
 object UserCommands {
 
