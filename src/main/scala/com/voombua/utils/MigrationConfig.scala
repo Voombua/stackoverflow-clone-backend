@@ -6,6 +6,7 @@ trait MigrationConfig extends Config {
 
   private val flyway = new Flyway()
   flyway.setDataSource(databaseUrl, databaseUser, databasePassword)
+  flyway.setBaselineOnMigrate(true)
 
   def migrate() = {
     flyway.migrate()
