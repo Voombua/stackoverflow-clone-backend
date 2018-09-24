@@ -16,4 +16,6 @@ object UserDao extends BaseDao {
 
   def delete(userId: UserId): Future[Int] = usersTable.filter(_.id === userId).delete
 
+  def findByEmail(email: String): Future[User] = usersTable.filter(user ⇒ user.email === email).result.head
+
 }
