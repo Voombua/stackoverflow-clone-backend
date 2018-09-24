@@ -3,11 +3,11 @@ package com.voombua.commands
 import com.voombua.messages.LoginRequestMessage
 import com.voombua.repos.UserDao
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 
 object UserCommands {
 
-  def loginByEmail(request: LoginRequestMessage)(implicit ec: ExecutionContext) = {
+  def loginByEmail(request: LoginRequestMessage)(implicit ec: ExecutionContext): Future[Boolean] = {
     for {
       e ← UserDao.findByEmail(request.email)
       _ ← UserDao.findById(e.id.get)
