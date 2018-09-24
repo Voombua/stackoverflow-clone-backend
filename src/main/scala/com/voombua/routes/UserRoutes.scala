@@ -11,7 +11,6 @@ import com.voombua.repos.UserDao
 
 import scala.concurrent.duration._
 import scala.util.{ Failure, Success }
-import scala.concurrent.ExecutionContext.Implicits.global
 
 class UserRoutes extends JsonMapping {
   val service = "users"
@@ -32,6 +31,7 @@ class UserRoutes extends JsonMapping {
   }
 
   protected val loginByEmail: Route = {
+    import scala.concurrent.ExecutionContext.Implicits.global
     pathPrefix(service / version / "login") {
       post {
         pathEndOrSingleSlash {
