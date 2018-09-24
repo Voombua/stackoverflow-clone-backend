@@ -6,11 +6,11 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.Http.ServerBinding
 import akka.stream.ActorMaterializer
 import com.voombua.routes.UserRoutes
-import com.voombua.utils.{ Config, MigrationConfig }
+import com.voombua.utils.{ Config, MigrationConfig, RequestTimeout }
 
 import scala.concurrent.{ ExecutionContextExecutor, Future }
 
-object ServiceMain extends App with Config with MigrationConfig {
+object ServiceMain extends App with Config with MigrationConfig with RequestTimeout {
 
   implicit val system: ActorSystem = ActorSystem() // ActorMaterializer requires an implicit ActorSystem
   implicit val ec: ExecutionContextExecutor = system.dispatcher // bindingFuture.map requires an implicit ExecutionContext

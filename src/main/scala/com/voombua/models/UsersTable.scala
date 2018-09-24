@@ -7,5 +7,5 @@ class UsersTable(tag: Tag) extends Table[User](tag, "users") {
   def username = column[String]("username")
   def email = column[String]("email")
   def password = column[String]("password")
-  def * = (id.?, username, password, email) <> ((User.apply _).tupled, User.unapply)
+  def * = (id.?, username, email, password) <> ((User.apply _).tupled, User.unapply)
 }
