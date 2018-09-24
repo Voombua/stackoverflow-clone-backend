@@ -36,7 +36,7 @@ class UserRoutes extends JsonMapping {
       post {
         pathEndOrSingleSlash {
           entity(as[LoginRequestMessage]) { log ⇒
-            onComplete(UserCommands.loginByEmail2(log)) {
+            onComplete(UserCommands.loginByEmail(log)) {
               case Success(user) ⇒ if (user) { complete(StatusCodes.OK) }
               else { complete(StatusCodes.Forbidden) }
               case Failure(_) ⇒ complete(StatusCodes.NotFound)
