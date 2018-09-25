@@ -24,9 +24,12 @@ lazy val root = (project in file(".")).
       "org.postgresql"     %  "postgresql"                    % "42.2.5",
       "org.flywaydb"       %  "flyway-core"                   % "5.1.4",
       "com.typesafe.slick" %% "slick"                         % slickVersion,
+      "com.typesafe.slick" %% "slick-hikaricp"                % slickVersion,
       "org.slf4j"          %  "slf4j-nop"                     % "1.7.25",
       "com.typesafe.slick" %% "slick-hikaricp"                % slickVersion,
       "com.jason-goodwin" %% "authentikat-jwt"                % "0.4.5",
+      "joda-time"         % "joda-time"                       % "2.10",
+      "com.typesafe.akka" %% "akka-http-spray-json"           % "10.0.11",
 
       "com.typesafe.akka" %% "akka-http-testkit"    % akkaHttpVersion % Test,
       "com.typesafe.akka" %% "akka-testkit"         % akkaVersion     % Test,
