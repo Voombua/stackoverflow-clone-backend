@@ -30,6 +30,7 @@ lazy val root = (project in file(".")).
       "com.jason-goodwin" %% "authentikat-jwt"                % "0.4.5",
       "joda-time"         % "joda-time"                       % "2.10",
       "com.typesafe.akka" %% "akka-http-spray-json"           % "10.0.11",
+      "com.roundeights"   %% "hasher"                         % "1.2.0",
 
       "com.typesafe.akka" %% "akka-http-testkit"    % akkaHttpVersion % Test,
       "com.typesafe.akka" %% "akka-testkit"         % akkaVersion     % Test,
