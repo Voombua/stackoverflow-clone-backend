@@ -9,6 +9,7 @@ trait MigrationConfig extends Config {
   flyway.setBaselineOnMigrate(true)
 
   def migrate(): Int = {
+    flyway.repair()
     flyway.migrate()
   }
 
