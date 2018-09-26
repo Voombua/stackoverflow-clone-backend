@@ -1,42 +1,43 @@
 package com.voombua.models
 
 import java.sql.Timestamp
-import java.util.UUID
+
+import com.voombua.core._
 
 trait Entity {
-  def id: Option[UUID]
-  def created: Option[Timestamp]
+  def id: String
+  def created: Timestamp
   def updated: Option[Timestamp]
   def deleted: Option[Timestamp]
 }
 
 case class User(
-  id: Option[UUID],
+  id: UserId,
   username: String,
   email: String,
   password: String,
-  created: Option[Timestamp],
+  created: Timestamp,
   updated: Option[Timestamp],
   deleted: Option[Timestamp]
 ) extends Entity
 
 case class Post(
-  id: Option[UUID],
-  userId: UUID,
+  id: String,
+  userId: UserId,
   title: String,
   content: String,
   tags: String,
-  created: Option[Timestamp],
+  created: Timestamp,
   updated: Option[Timestamp],
   deleted: Option[Timestamp]
 ) extends Entity
 
 case class Comment(
-  id: Option[UUID],
-  userId: UUID,
-  postId: UUID,
+  id: String,
+  userId: UserId,
+  postId: String,
   content: String,
-  created: Option[Timestamp],
+  created: Timestamp,
   updated: Option[Timestamp],
   deleted: Option[Timestamp]
 ) extends Entity
