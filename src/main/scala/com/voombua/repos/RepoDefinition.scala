@@ -54,7 +54,7 @@ trait TableDefinition { this: DB =>
   )
       extends Table[E](tag, schemaName, tableName) {
 
-    val id = column[UUID]("id", O.PrimaryKey)
+    val id = column[String]("id", O.PrimaryKey)
     val created = column[Timestamp]("created_at")
     val updated = column[Timestamp]("updated_at")
     val deleted = column[Timestamp]("deleted_at")
@@ -63,10 +63,10 @@ trait TableDefinition { this: DB =>
 
 sealed trait Repository[E <: Entity] {
   def all: Future[Seq[E]]
-  def byId(id: UUID): Future[Option[E]]
+  def byId(id: String): Future[Option[E]]
   def insert(entity: E): Future[E]
   def update(entity: E): Future[Int]
-  def delete(id: UUID): Future[Boolean]
+  def delete(id: String): Future[Boolean]
 }
 
 /**
@@ -86,7 +86,7 @@ trait RepoDefinition extends TableDefinition { this: DB =>
       table.to[Seq].result
     }
 
-    override def byId(id: UUID): Future[Option[E]] = db.run {
+    override def byId(id: String): Future[Option[E]] = db.run {
       table.filter(_.id === id).result.headOption
     }
 
@@ -98,7 +98,7 @@ trait RepoDefinition extends TableDefinition { this: DB =>
       table.insertOrUpdate(entity)
     }
 
-    override def delete(id: UUID): Future[Boolean] = db.run {
+    override def delete(id: String): Future[Boolean] = db.run {
       table.filter(_.id === id).delete.map(_ > 0)
     }
   }
