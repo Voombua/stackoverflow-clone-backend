@@ -3,6 +3,8 @@ package com.voombua
 package object core {
   type UserId = String
   type AuthToken = String
+  type QuestionId = String
+
 
   final case class AuthTokenContent(userId: UserId)
 
