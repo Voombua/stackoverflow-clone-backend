@@ -21,21 +21,21 @@ case class User(
   deleted: Option[Timestamp]
 ) extends Entity
 
-case class Post(
-  id: String,
+case class Question(
+  id: QuestionId,
   userId: UserId,
   title: String,
   content: String,
-  tags: String,
+  tags: Option[String],
   created: Timestamp,
   updated: Option[Timestamp],
   deleted: Option[Timestamp]
 ) extends Entity
 
-case class Comment(
+case class Answers(
   id: String,
   userId: UserId,
-  postId: String,
+  questionId: String,
   content: String,
   created: Timestamp,
   updated: Option[Timestamp],
