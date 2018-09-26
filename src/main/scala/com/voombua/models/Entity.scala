@@ -35,7 +35,7 @@ case class Question(
 case class Answers(
   id: String,
   userId: UserId,
-  questionId: String,
+  questionId: QuestionId,
   content: String,
   created: Timestamp,
   updated: Option[Timestamp],
