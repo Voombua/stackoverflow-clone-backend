@@ -5,6 +5,7 @@ import akka.event.Logging
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.Http.ServerBinding
 import akka.stream.ActorMaterializer
+import com.voombua.core.AuthService
 import com.voombua.models.UserComponent
 import com.voombua.repos.{ DB, PG }
 import com.voombua.routes.UserRoutes
@@ -17,8 +18,9 @@ object ServiceMain extends App with Config with MigrationConfig with UserCompone
   implicit val system: ActorSystem = ActorSystem() // ActorMaterializer requires an implicit ActorSystem
   implicit val ec: ExecutionContextExecutor = system.dispatcher // bindingFuture.map requires an implicit ExecutionContext
   val userRepo: UserRepository = new UserRepository()
+  val auth = new AuthService(userRepo, "my_secret_key")
 
-  val api = new UserRoutes(userRepo).routes // the RestApi provides a Route
+  val api = new UserRoutes(userRepo, auth).routes // the RestApi provides a Route
 
   implicit val materializer: ActorMaterializer = ActorMaterializer() // bindAndHandle requires an implicit materializer
 
