@@ -31,6 +31,7 @@ lazy val root = (project in file(".")).
       "io.circe"          %% "circe-generic"                  % circeV,
       "io.circe"          %% "circe-parser"                   % circeV,
       "com.pauldijou"     %% "jwt-core"                       % "0.16.0",
+      "ch.megard"         %% "akka-http-cors"                 % "0.3.0",
 
       "com.typesafe.akka" %% "akka-http-testkit"    % akkaHttpVersion % Test,
       "com.typesafe.akka" %% "akka-testkit"         % akkaVersion     % Test,
