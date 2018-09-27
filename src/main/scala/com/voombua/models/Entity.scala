@@ -32,8 +32,8 @@ case class Question(
   deleted: Option[Timestamp]
 ) extends Entity
 
-case class Answers(
-  id: String,
+case class Answer(
+  id: AnswerId,
   userId: UserId,
   questionId: QuestionId,
   content: String,
