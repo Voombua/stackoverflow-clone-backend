@@ -37,11 +37,14 @@ trait QuestionComponent extends RepoDefinition with UserComponent { this: DB ⇒
 
     }
 
-    override def deleteQuestion(questionId: QuestionId): Future[Int] =
-      db.run(table.filter(_.id === questionId).delete)
+    override def deleteQuestion(questionId: QuestionId, userId: UserId): Future[Int] =
+      db.run(table.filter(question ⇒ question.id === questionId || question.userId === userId).delete)
 
     override def saveQuestion(question: Question): Future[Question] =
       db.run(table.insertOrUpdate(question)).map(_ => question)
+
+    override def findUserQuestion(id: QuestionId): Future[Option[Question]] =
+      db.run(table.filter(_.id === id).result.headOption)
   }
 }
 
@@ -49,6 +52,7 @@ sealed trait QuestionsDAO {
   def findUserQuestions(): Future[Seq[Question]]
   def findByUserIdAndQuestionId(userId: UserId, questionId: QuestionId): Future[Question]
   def updateQuestion(newQuestion: Question, questionId: QuestionId): Future[Int]
-  def deleteQuestion(questionId: QuestionId): Future[Int]
+  def deleteQuestion(questionId: QuestionId, userId: QuestionId): Future[Int]
   def saveQuestion(question: Question): Future[Question]
+  def findUserQuestion(id: QuestionId): Future[Option[Question]]
 }

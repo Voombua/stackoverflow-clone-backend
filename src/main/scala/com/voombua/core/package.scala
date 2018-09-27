@@ -4,7 +4,7 @@ package object core {
   type UserId = String
   type AuthToken = String
   type QuestionId = String
-
+  type AnswerId = String
 
   final case class AuthTokenContent(userId: UserId)
 
