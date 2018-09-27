@@ -5,23 +5,27 @@ import akka.event.Logging
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.Http.ServerBinding
 import akka.stream.ActorMaterializer
-import com.voombua.core.{ AuthService, QuestionService }
-import com.voombua.models.{ QuestionComponent, UserComponent }
-import com.voombua.repos.{ DB, PG }
-import com.voombua.routes.{ HttpRoute, UserRoutes }
-import com.voombua.utils.{ Config, MigrationConfig }
+import com.voombua.core.{AnswerService, AuthService, QuestionService}
+import com.voombua.models.{AnswerComponent, QuestionComponent, UserComponent}
+import com.voombua.repos.{DB, PG}
+import com.voombua.routes.HttpRoute
+import com.voombua.utils.{Config, MigrationConfig}
 
-import scala.concurrent.{ ExecutionContextExecutor, Future }
+import scala.concurrent.{ExecutionContextExecutor, Future}
 
-object ServiceMain extends App with Config with MigrationConfig with UserComponent with DB with PG with QuestionComponent {
+object ServiceMain extends App with Config with MigrationConfig with UserComponent with DB with PG with QuestionComponent
+    with AnswerComponent {
 
   implicit val system: ActorSystem = ActorSystem()
   implicit val ec: ExecutionContextExecutor = system.dispatcher
   val userRepo: UserRepository = new UserRepository()
   val questionRepo = new QuestionRepository()
+  val answerRepo = new AnswersRepository()
   val auth = new AuthService(userRepo, "my_secret_key")
   val questionService = new QuestionService(questionRepo)
-  val httpRoute = new HttpRoute(auth, questionService, "my_secret_key", userRepo, questionRepo).route
+  val answerService = new AnswerService(answerRepo)
+  val httpRoute = new HttpRoute(auth, questionService, "my_secret_key", userRepo, questionRepo, answerService,
+    answerRepo).route
 
   implicit val materializer: ActorMaterializer = ActorMaterializer()
 
