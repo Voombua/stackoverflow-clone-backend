@@ -5,13 +5,13 @@ import akka.event.Logging
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.Http.ServerBinding
 import akka.stream.ActorMaterializer
-import com.voombua.core.{AnswerService, AuthService, QuestionService}
-import com.voombua.models.{AnswerComponent, QuestionComponent, UserComponent}
-import com.voombua.repos.{DB, PG}
+import com.voombua.core.{ AnswerService, AuthService, QuestionService }
+import com.voombua.models.{ AnswerComponent, QuestionComponent, UserComponent }
+import com.voombua.repos.{ DB, PG }
 import com.voombua.routes.HttpRoute
-import com.voombua.utils.{Config, MigrationConfig}
+import com.voombua.utils.{ Config, MigrationConfig }
 
-import scala.concurrent.{ExecutionContextExecutor, Future}
+import scala.concurrent.{ ExecutionContextExecutor, Future }
 
 object ServiceMain extends App with Config with MigrationConfig with UserComponent with DB with PG with QuestionComponent
     with AnswerComponent {
