@@ -38,7 +38,7 @@ trait QuestionComponent extends RepoDefinition with UserComponent { this: DB ⇒
     }
 
     override def deleteQuestion(questionId: QuestionId, userId: UserId): Future[Int] =
-      db.run(table.filter(question ⇒ question.id === questionId || question.userId === userId).delete)
+      db.run(table.filter(question ⇒ question.id === questionId && question.userId === userId).delete)
 
     override def saveQuestion(question: Question): Future[Question] =
       db.run(table.insertOrUpdate(question)).map(_ => question)
