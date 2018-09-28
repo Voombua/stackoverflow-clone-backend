@@ -13,7 +13,7 @@ class HttpRoute(authService: AuthService, questionService: QuestionService,
     questionRepo: QuestionComponent#QuestionRepository, ansService: AnswerService,
     answerRepo: AnswerComponent#AnswersRepository)(implicit ec: ExecutionContext) {
   private val userRoutes: UserRoutes = new UserRoutes(userRepo, authService)
-  private val questionRoute: QuestionRoute = new QuestionRoute(secretKey, questionRepo, questionService, ansService)
+  private val questionRoute: QuestionRoute = new QuestionRoute(secretKey, questionRepo, questionService, ansService, answerRepo)
 
   val route: Route =
     cors() {

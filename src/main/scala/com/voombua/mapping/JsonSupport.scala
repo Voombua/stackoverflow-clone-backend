@@ -5,7 +5,7 @@ import java.time.Instant
 import java.util.UUID
 
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
-import com.voombua.messages._
+import com.voombua.messages.{ AnswerUpdateMessage, _ }
 import com.voombua.models.{ Answer, Question, User }
 import spray.json.{ DefaultJsonProtocol, JsNumber, JsString, JsValue, JsonFormat, RootJsonFormat }
 
@@ -45,4 +45,5 @@ trait JsonProtocol extends SprayJsonSupport with BaseJsonProtocol {
   implicit val questionUpdateMessageFormat: RootJsonFormat[QuestionUpdateMessage] = jsonFormat3(QuestionUpdateMessage)
   implicit val answerFormat: RootJsonFormat[Answer] = jsonFormat7(Answer)
   implicit val answerMessageFormat: RootJsonFormat[AnswerMessage] = jsonFormat1(AnswerMessage)
+  implicit val answerUpdateMessage: RootJsonFormat[AnswerUpdateMessage] = jsonFormat1(AnswerUpdateMessage)
 }
