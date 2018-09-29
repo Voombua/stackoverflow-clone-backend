@@ -14,8 +14,10 @@ import scala.language.postfixOps
 class UserRoutes(repo: UserComponent#UserRepository, auth: AuthService) extends JsonProtocol {
   import scala.concurrent.ExecutionContext.Implicits.global
 
+  val service = "user"
+
   protected val createUser: Route = {
-    pathPrefix("user") {
+    pathPrefix(service) {
       post {
         pathEndOrSingleSlash {
           withRequestTimeout(5 minutes) {
@@ -30,7 +32,7 @@ class UserRoutes(repo: UserComponent#UserRepository, auth: AuthService) extends 
   }
 
   protected val getUsers: Route = {
-    pathPrefix("users") {
+    pathPrefix(service / "users") {
       get {
         pathEndOrSingleSlash {
           complete(repo.all)
@@ -40,7 +42,7 @@ class UserRoutes(repo: UserComponent#UserRepository, auth: AuthService) extends 
   }
 
   protected val logIn: Route = {
-    pathPrefix("login") {
+    pathPrefix(service / "login") {
       post {
         pathEndOrSingleSlash {
           entity(as[LoginRequestMessage]) { request ⇒
