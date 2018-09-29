@@ -32,7 +32,7 @@ class UserRoutes(repo: UserComponent#UserRepository, auth: AuthService) extends 
   }
 
   protected val getUsers: Route = {
-    pathPrefix(service / "users") {
+    pathPrefix(service / "all") {
       get {
         pathEndOrSingleSlash {
           complete(repo.all)
